@@ -40,6 +40,7 @@ from .tools.activity_analysis import (
     search_intervals,
 )
 from .tools.athlete import get_athlete_profile, get_fitness_summary
+from .tools.coach_extensions import bulk_upsert_tagged_events, get_week_summary
 from .tools.curves import get_hr_curves, get_pace_curves
 from .tools.event_management import (
     bulk_create_events,
@@ -134,6 +135,10 @@ mcp.tool()(update_sport_settings)
 mcp.tool()(apply_sport_settings)
 mcp.tool()(create_sport_settings)
 mcp.tool()(delete_sport_settings)
+
+# Register Tempo coach extensions
+mcp.tool()(get_week_summary)
+mcp.tool()(bulk_upsert_tagged_events)
 
 
 # MCP Resources - Provide ongoing context
