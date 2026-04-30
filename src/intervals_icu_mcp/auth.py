@@ -14,6 +14,9 @@ class ICUConfig(BaseSettings):
         env_file=".env",
         env_file_encoding="utf-8",
         case_sensitive=False,
+        # Ignore unknown env vars so this config can coexist with other
+        # services' creds in a shared .env (e.g. STRAVA_* for the strava MCP).
+        extra="ignore",
     )
 
     intervals_icu_api_key: str = ""
