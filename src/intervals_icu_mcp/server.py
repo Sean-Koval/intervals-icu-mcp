@@ -69,6 +69,7 @@ from .tools.sport_settings import (
 )
 from .tools.wellness import get_wellness_data, get_wellness_for_date, update_wellness
 from .tools.workout_library import get_workout_library, get_workouts_in_folder
+from .tools.workout_write import create_workout, delete_workout, update_workout
 
 # Register activity tools
 mcp.tool()(get_recent_activities)
@@ -139,6 +140,9 @@ mcp.tool()(delete_sport_settings)
 # Register Tempo coach extensions
 mcp.tool()(get_week_summary)
 mcp.tool()(bulk_upsert_tagged_events)
+mcp.tool()(create_workout)
+mcp.tool()(update_workout)
+mcp.tool()(delete_workout)
 
 
 # MCP Resources - Provide ongoing context

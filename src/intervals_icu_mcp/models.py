@@ -196,7 +196,14 @@ class Event(BaseModel):
 
 
 class Workout(BaseModel):
-    """Workout from library."""
+    """Workout from library.
+
+    Includes write-relevant fields (``workout_doc``, ``target``, ``tags``,
+    ``file_contents``) so the model can round-trip POST/PUT bodies for
+    ``create_workout`` / ``update_workout``. The intervals.icu API does not
+    expose ``external_id`` on workouts (unlike events), so Tempo uses an entry
+    in ``tags`` (``tempo:ext:<external_id>``) for round-trip discovery.
+    """
 
     id: int
     athlete_id: str | None = Field(None, alias="athlete_id")
@@ -212,6 +219,14 @@ class Workout(BaseModel):
     indoor: bool | None = None
     color: str | None = None
     type: str | None = None
+
+    # Write-side fields (populated on POST/PUT responses too):
+    workout_doc: dict[str, Any] | None = Field(None, alias="workout_doc")
+    target: str | None = None
+    tags: list[str] | None = None
+    file_contents: str | None = Field(None, alias="file_contents")
+    filename: str | None = None
+    updated: str | None = None
 
     model_config = ConfigDict(populate_by_name=True)
 
